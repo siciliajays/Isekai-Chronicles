@@ -8418,6 +8418,8 @@ function startCombat(quest, enemy, isPromotion) {
     quest,
     isPromotion,
     playerStamina: Math.floor(G.stamina),  // snap to integer so display matches exactly
+    playerMp: Math.floor(G.mp || 0),       // track MP for mage classes
+    playerMaxMp: Math.floor(G.maxMp || 100),
     log: [],
     active: true,
     turn: 0,
@@ -8706,7 +8708,11 @@ function combatAction(action) {
   } else if (action === 'rest') {
     const gained = 30;
     combatState.playerStamina = Math.min(100, combatState.playerStamina + gained);
-    addCombatLog(log, '💨 You catch your breath and recover ' + gained + ' stamina. The enemy watches.', 'system-msg');
+    // Also restore MP for mage classes
+    var _isMageRest = ['elementalist','necromancer','summoner','battlemage'].indexOf(G.classSub) !== -1;
+    var _mpGained = _isMageRest ? 20 : 0;
+    if (_isMageRest) { combatState.playerMp = Math.min(combatState.playerMaxMp || 100, (combatState.playerMp || 0) + _mpGained); }
+    addCombatLog(log, '💨 You catch your breath and recover ' + gained + ' STA' + (_isMageRest ? ' & +' + _mpGained + ' MP' : '') + ' restored. The enemy watches.', 'system-msg');
     updatePlayerHpDisplay();
   }
 
@@ -9180,7 +9186,7 @@ function renderCombat() {
     + '<button class="btn" onclick="combatAction(\'block\')" id="btn-block">🛡️ Block<br><small style="font-size:0.6rem;color:var(--text-muted)">-10 STA</small></button>'
     + '<button class="btn" onclick="combatAction(\'dodge\')" id="btn-dodge">🌀 Dodge<br><small style="font-size:0.6rem;color:var(--text-muted)">-20 STA</small></button>'
     + '<button class="btn" onclick="combatAction(\'item\')">⚗ Item<br><small style="font-size:0.6rem;color:var(--text-muted)">Use potion</small></button>'
-    + '<button class="btn" onclick="combatAction(\'rest\')" id="btn-rest" style="grid-column:1/-1;background:rgba(80,120,200,0.12);border-color:rgba(80,120,200,0.3);">💨 Catch Breath<br><small style="font-size:0.6rem;color:var(--text-muted)">Skip turn · +30 STA</small></button>'
+    + '<button class="btn" onclick="combatAction(\'rest\')" id="btn-rest" style="grid-column:1/-1;background:rgba(80,120,200,0.12);border-color:rgba(80,120,200,0.3);">💨 Catch Breath<br><small style="font-size:0.6rem;color:var(--text-muted)">Skip turn · +30 STA / +20 MP</small></button>'
     + '</div>'
     + renderSkillButtons()
 
