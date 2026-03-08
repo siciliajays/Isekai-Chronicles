@@ -8252,11 +8252,13 @@ function updateSkillButtons() {
     const cd = (combatState && combatState.skillCooldowns && combatState.skillCooldowns[sk.id]) || 0;
     const isReady = cd <= 0;
     const staCost = sk.staCost || 0;
+    const mpCost = sk.mpCost || 0;
     const hasStamina = combatState && combatState.playerStamina >= staCost;
-    btn.disabled = !(isPlayerTurn && isReady && hasStamina);
+    const canAfford = mpCost ? (combatState.playerMp||0) >= mpCost : hasStamina;
+    btn.disabled = !(isPlayerTurn && isReady && canAfford);
     btn.className = 'skill-btn' + (isReady && isPlayerTurn && hasStamina ? ' skill-ready' : '');
     const cdSpan = btn.querySelector('.skill-cd');
-    if (cdSpan) cdSpan.textContent = isReady ? `-${sk.mpCost ? sk.mpCost + ' MP' : staCost + ' STA'}` : `CD: ${cd} turn${cd!==1?'s':''}`;
+    if (cdSpan) cdSpan.textContent = isReady ? `-${sk.mpCost ? mpCost + ' MP' : staCost + ' STA'}` : `CD: ${cd} turn${cd!==1?'s':''}`;
   });
 }
 
