@@ -8029,7 +8029,7 @@ const CLASS_SKILLS = {
   ],
   // ── MAGE SUBCLASSES ──
   elementalist: [
-    { id:'fireball',     name:'🔥 Fireball',      icon:'🔥', staCost:30, cooldown:3,
+    { id:'fireball',     name:'🔥 Fireball',      icon:'🔥', mpCost:30, cooldown:3,
       desc:'Hurl a blazing fireball. Deals 3× INT damage. Leaves enemy burning for 2 turns.',
       use: function(cs, log) {
         const e = cs.enemy;
@@ -8042,7 +8042,7 @@ const CLASS_SKILLS = {
         return e.currentHp <= 0 ? 'win' : null;
       }
     },
-    { id:'ice_lance',    name:'❄️ Ice Lance',     icon:'❄️', staCost:22, cooldown:3,
+    { id:'ice_lance',    name:'❄️ Ice Lance',     icon:'❄️', mpCost:22, cooldown:3,
       desc:'Frozen spear. Deals 2.2× INT damage and slows the enemy (skip their next turn).',
       use: function(cs, log) {
         const e = cs.enemy;
@@ -8056,7 +8056,7 @@ const CLASS_SKILLS = {
     },
   ],
   necromancer: [
-    { id:'drain_life',   name:'💀 Drain Life',    icon:'💀', staCost:25, cooldown:3,
+    { id:'drain_life',   name:'💀 Drain Life',    icon:'💀', mpCost:25, cooldown:3,
       desc:'Siphon life force. Deals 2× INT damage AND heals you for the same amount.',
       use: function(cs, log) {
         const e = cs.enemy;
@@ -8069,7 +8069,7 @@ const CLASS_SKILLS = {
         return e.currentHp <= 0 ? 'win' : null;
       }
     },
-    { id:'curse',        name:'☠️ Wither Curse',  icon:'☠️', staCost:18, cooldown:4,
+    { id:'curse',        name:'☠️ Wither Curse',  icon:'☠️', mpCost:18, cooldown:4,
       desc:'Apply a rotting curse. Enemy loses 20% max HP over 3 turns.',
       use: function(cs, log) {
         const e = cs.enemy;
@@ -8082,7 +8082,7 @@ const CLASS_SKILLS = {
     },
   ],
   summoner: [
-    { id:'arcane_bolt',  name:'🌀 Arcane Burst',  icon:'🌀', staCost:20, cooldown:2,
+    { id:'arcane_bolt',  name:'🌀 Arcane Burst',  icon:'🌀', mpCost:20, cooldown:2,
       desc:'Rapid arcane burst. Deals 2.5× INT damage. Short cooldown.',
       use: function(cs, log) {
         const e = cs.enemy;
@@ -8093,7 +8093,7 @@ const CLASS_SKILLS = {
         return e.currentHp <= 0 ? 'win' : null;
       }
     },
-    { id:'bind',         name:'🔗 Arcane Bind',   icon:'🔗', staCost:15, cooldown:4,
+    { id:'bind',         name:'🔗 Arcane Bind',   icon:'🔗', mpCost:15, cooldown:4,
       desc:'Bind the enemy in magical chains. Skip their next 2 turns.',
       use: function(cs, log) {
         cs.enemy._boundTurns = 2;
@@ -8103,7 +8103,7 @@ const CLASS_SKILLS = {
     },
   ],
   battlemage: [
-    { id:'spellblade',   name:'✨ Spellblade',    icon:'✨', staCost:28, cooldown:3,
+    { id:'spellblade',   name:'✨ Spellblade',    icon:'✨', mpCost:28, cooldown:3,
       desc:'Infuse weapon with magic. Deals (STR + INT) × 1.8 damage.',
       use: function(cs, log) {
         const e = cs.enemy;
@@ -8114,7 +8114,7 @@ const CLASS_SKILLS = {
         return e.currentHp <= 0 ? 'win' : null;
       }
     },
-    { id:'mana_shield',  name:'🔵 Mana Shield',   icon:'🔵', staCost:12, cooldown:4,
+    { id:'mana_shield',  name:'🔵 Mana Shield',   icon:'🔵', mpCost:12, cooldown:4,
       desc:'Surround yourself with mana. Absorb the next hit completely.',
       use: function(cs, log) {
         cs.pendingManaShield = true;
@@ -8234,7 +8234,7 @@ function renderSkillButtons() {
     const cd = (combatState && combatState.skillCooldowns && combatState.skillCooldowns[sk.id]) || 0;
     const isReady = cd <= 0;
     const cdTxt = isReady
-      ? `<span class="skill-cd">-${sk.staCost} STA</span>`
+      ? `<span class="skill-cd">-${sk.mpCost ? sk.mpCost + ' MP' : sk.staCost + ' STA'}</span>`
       : `<span class="skill-cd">CD: ${cd} turn${cd!==1?'s':''}</span>`;
     html += `<button class="skill-btn ${isReady?'skill-ready':''}" id="skill-btn-${sk.id}" onclick="combatSkill('${sk.id}')" ${isReady?'':''}>`
            + `${sk.icon} ${sk.name}${cdTxt}</button>`;
@@ -8256,7 +8256,7 @@ function updateSkillButtons() {
     btn.disabled = !(isPlayerTurn && isReady && hasStamina);
     btn.className = 'skill-btn' + (isReady && isPlayerTurn && hasStamina ? ' skill-ready' : '');
     const cdSpan = btn.querySelector('.skill-cd');
-    if (cdSpan) cdSpan.textContent = isReady ? `-${staCost} STA` : `CD: ${cd} turn${cd!==1?'s':''}`;
+    if (cdSpan) cdSpan.textContent = isReady ? `-${sk.mpCost ? sk.mpCost + ' MP' : staCost + ' STA'}` : `CD: ${cd} turn${cd!==1?'s':''}`;
   });
 }
 
@@ -8268,12 +8268,15 @@ function combatSkill(skillId) {
   if (!sk) return;
   const cd = (combatState.skillCooldowns && combatState.skillCooldowns[skillId]) || 0;
   if (cd > 0) return;
-  if (combatState.playerStamina < sk.staCost) {
-    addCombatLog(document.getElementById('combat-log'), `Not enough stamina for ${sk.name}! (Need ${sk.staCost} STA)`, 'system-msg');
+  var _isMage = ['elementalist','necromancer','summoner','battlemage'].indexOf(G.classSub) !== -1 && sk.mpCost;
+var _skillCost = _isMage ? sk.mpCost : sk.staCost;
+var _skillPool = _isMage ? combatState.playerMp : combatState.playerStamina;
+if (_skillPool < _skillCost) {
+    addCombatLog(document.getElementById('combat-log'), `Not enough ${_isMage ? 'MP' : 'stamina'} for ${sk.name}! (Need ${_skillCost} ${_isMage ? 'MP' : 'STA'})`, 'system-msg');
     return;
   }
   combatState.waitingForPlayer = false;
-  combatState.playerStamina -= sk.staCost;
+  if (_isMage) { combatState.playerMp -= _skillCost; } else { combatState.playerStamina -= _skillCost; }
   combatState.turn++;
   if (!combatState.skillCooldowns) combatState.skillCooldowns = {};
   combatState.skillCooldowns[skillId] = sk.cooldown;
