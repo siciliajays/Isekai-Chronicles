@@ -7915,14 +7915,14 @@ function doPromotion(targetRank) {
 
 function getRankTrialEnemy(rank) {
   const enemies = {
-    F: { name:'G-Rank Instructor', icon:'🧑‍🏫', hp:30, str:4, def:2, exp:0, rank:'G', reward:'promotion' },
-    E: { name:'F-Rank Veteran', icon:'🧔', hp:60, str:7, def:4, exp:0, rank:'F', reward:'promotion' },
-    D: { name:'E-Rank Knight', icon:'🪖', hp:100, str:10, def:7, exp:0, rank:'E', reward:'promotion' },
-    C: { name:'D-Rank Warrior', icon:'⚔️', hp:160, str:15, def:10, exp:0, rank:'D', reward:'promotion' },
-    B: { name:'C-Rank Champion', icon:'👑', hp:250, str:20, def:15, exp:0, rank:'C', reward:'promotion' },
-    A: { name:'B-Rank Elite', icon:'🦅', hp:400, str:28, def:20, exp:0, rank:'B', reward:'promotion' },
-    S: { name:'A-Rank Legend', icon:'🌟', hp:600, str:38, def:28, exp:0, rank:'A', reward:'promotion' },
-    SS: { name:'S-Rank Master', icon:'✨', hp:1000, str:55, def:40, exp:0, rank:'S', reward:'promotion' },
+    F: { name:'G-Rank Instructor', icon:'🧑‍🏫', hp:200, str:4, def:2, exp:0, rank:'G', reward:'promotion' },
+    E: { name:'F-Rank Veteran', icon:'🧔', hp:600, str:7, def:4, exp:0, rank:'F', reward:'promotion' },
+    D: { name:'E-Rank Knight', icon:'🪖', hp:1000, str:10, def:7, exp:0, rank:'E', reward:'promotion' },
+    C: { name:'D-Rank Warrior', icon:'⚔️', hp:1600, str:15, def:10, exp:0, rank:'D', reward:'promotion' },
+    B: { name:'C-Rank Champion', icon:'👑', hp:2500, str:20, def:15, exp:0, rank:'C', reward:'promotion' },
+    A: { name:'B-Rank Elite', icon:'🦅', hp:4000, str:28, def:20, exp:0, rank:'B', reward:'promotion' },
+    S: { name:'A-Rank Legend', icon:'🌟', hp:6000, str:38, def:28, exp:0, rank:'A', reward:'promotion' },
+    SS: { name:'S-Rank Master', icon:'✨', hp:10000, str:55, def:40, exp:0, rank:'S', reward:'promotion' },
   };
   return enemies[rank] || enemies.F;
 }
