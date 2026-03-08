@@ -8362,7 +8362,7 @@ function generateQuestEnemy(quest) {
   };
   const pool = enemies[quest.rank] || enemies.G;
   const e = pool[Math.floor(Math.random() * pool.length)];
-  const hp = 200 * t;
+  const hp = 2000 * t;
   return { name: e.name, icon: e.icon, flavor: e.flavor, hp: hp, maxHp: hp, currentHp: hp, str: 3 * t, def: t, dex: Math.floor(t * 1.5), rank: quest.rank };
 }
 
