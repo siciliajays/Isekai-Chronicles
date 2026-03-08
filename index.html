@@ -8056,12 +8056,12 @@ const CLASS_SKILLS = {
     },
   ],
   necromancer: [
-    { id:'drain_life',   name:'💀 Drain Life',    icon:'💀', mpCost:25, cooldown:3,
-      desc:'Siphon life force. Deals 0.4× INT damage AND heals you for the same amount.',
+    { id:'drain_life',   name:'💀 Drain Life',    icon:'💀', mpCost:60, cooldown:3,
+      desc:'Siphon life force. Deals 0.2× INT damage AND heals you for the same amount.',
       use: function(cs, log) {
         const e = cs.enemy;
-        const dmg = Math.max(2, Math.floor(getTotalStat('int') * 2 + Math.random() * 4) - Math.floor((e.def||0)*0.3));
-        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
+        const dmg = Math.max(0.2, Math.floor(getTotalStat('int') * 0.1 + Math.random() * 0.1) - Math.floor((e.def||0)*0.3));
+        const nerfedDmg = Math.ceil(dmg * 3);  e.currentHp -= nerfedDmg;
         G.hp = Math.min(G.maxHp, G.hp + dmg);
         updateTopBar(); updatePlayerHpDisplay();
         addCombatLog(log, `💀 Drain Life! Siphon ${dmg} damage from ${e.name} — fully restored to you!`, 'skill-action');
