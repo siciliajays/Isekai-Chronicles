@@ -11779,5 +11779,61 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 1500);
 })();
 </script>
+
+<!-- PWA Install Banner -->
+<div id="pwa-install-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:linear-gradient(135deg,#1a0035,#2d0060);border-top:2px solid #7c3aed;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 20px rgba(124,58,237,0.4);">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span style="font-size:2rem;">⚔️</span>
+    <div>
+      <div style="color:#e0d8ff;font-weight:700;font-size:1rem;letter-spacing:0.05em;">Install Isekai Chronicles</div>
+      <div style="color:#a78bfa;font-size:0.8rem;">Play offline · Add to home screen</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button id="pwa-install-btn" style="background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:700;font-size:0.9rem;cursor:pointer;letter-spacing:0.05em;">INSTALL</button>
+    <button id="pwa-dismiss-btn" style="background:transparent;color:#a78bfa;border:1px solid #4c1d95;border-radius:8px;padding:8px 12px;font-size:0.85rem;cursor:pointer;">✕</button>
+  </div>
+</div>
+<script>
+// PWA INSTALL PROMPT
+(function() {
+  var deferredPrompt = null;
+  var banner = document.getElementById('pwa-install-banner');
+
+  // Don't show if already installed
+  if (window.matchMedia('(display-mode: standalone)').matches) return;
+  // Don't show if dismissed in last 7 days
+  var dismissed = localStorage.getItem('pwa_dismiss_time');
+  if (dismissed && Date.now() - parseInt(dismissed) < 7 * 24 * 60 * 60 * 1000) return;
+
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(function() {
+      if (banner) banner.style.display = 'flex';
+    }, 3000);
+  });
+
+  document.getElementById('pwa-install-btn').addEventListener('click', function() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(result) {
+      if (result.outcome === 'accepted') {
+        if (banner) banner.style.display = 'none';
+      }
+      deferredPrompt = null;
+    });
+  });
+
+  document.getElementById('pwa-dismiss-btn').addEventListener('click', function() {
+    if (banner) banner.style.display = 'none';
+    localStorage.setItem('pwa_dismiss_time', Date.now().toString());
+  });
+
+  window.addEventListener('appinstalled', function() {
+    if (banner) banner.style.display = 'none';
+  });
+})();
+</script>
 </body>
 </html>
