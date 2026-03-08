@@ -11720,184 +11720,64 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="crt-screen"></div>
     <div id="crt-line"></div>
   </div>
+
 <script>
-  // ── PROFILE PICTURE UPLOAD ──────────────────────────────
-  (function() {
-      function applyAvatar(dataUrl) {
-            // Desktop sidebar icon
-            const sbIcon = document.getElementById('sb-gender-icon');
-            if (sbIcon) {
-                    sbIcon.style.cssText = 'background-image:url('+dataUrl+');background-size:cover;background-position:center;border-radius:12px;font-size:0;';
-            }
-            // Mobile guild card photo
-            const cardPhoto = document.querySelector('.card-photo');
-            if (cardPhoto) {
-                    cardPhoto.style.cssText = 'background-image:url('+dataUrl+');background-size:cover;background-position:center;border-radius:8px;font-size:0;';
-            }
-      }
-
-      function setupAvatarClick() {
-            const sbIcon = document.getElementById('sb-gender-icon');
-            const cardPhoto = document.querySelector('.card-photo');
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.style.display = 'none';
-            document.body.appendChild(input);
-
-            input.addEventListener('change', function() {
-                    const file = input.files[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                              const dataUrl = e.target.result;
-                              localStorage.setItem('isekai_avatar', dataUrl);
-                              applyAvatar(dataUrl);
-                    };
-                    reader.readAsDataURL(file);
-            });
-
-            function makeClickable(el) {
-                    if (!el) return;
-                    el.style.cursor = 'pointer';
-                    el.title = 'Click to upload profile picture';
-                    el.addEventListener('click', function(e) {
-                              e.stopPropagation();
-                              input.click();
-                    });
-                    // Show camera overlay on hover
-                    el.addEventListener('mouseenter', function() {
-                              if (!el.querySelector<(s'c.raivpatt>a
-                                r/-/o v──e rPlRaOyF'I)L)E  {P
-                      I C T U R E   U P L OcAoDn s──t── ──o──v── ──=── ──d──o──c──u──m──e──n──t
-                      .(cfruenactteiEolne(m)e n{t
-                                                ( ' dfiuvn'c)t;i
-                                                o n   a p p l y A v aotva.rc(ldaastsaNUarmle)  ={ 
-                                                  ' a v a t/a/r -Doevsekrtloapy 's;i
-                                                  d e b a r   i c o n 
-                                                  o v . i ncnoenrsHtT MsLb I=c o'n📷 '=; 
-                                                  d o c u m e n t . g eotvE.lsetmyelnet.BcysIsdT(e'xstb -=g e'npdoesri-tiicoonn:'a)b;s
-                                                    o l u t ei;ft o(ps:b0I;cloenf)t :{0
-                                                                                      ; w i d t h :s1b0I0c%o;nh.esitgyhlte:.1c0s0s%T;edxits p=l a'yb:afclkegxr;oaulnidg-ni-miatgeem:su:rcle(n't+edra;tjauUsrtli+f'y)-;cboanctkegnrto:ucnedn-tseirz;eb:accokvgerro;ubnadc:krggrboau(n0d,-0p,o0s,i0t.i5o)n;:bcoerndteerr-;rbaodriduesr:-irnahdeiruist:;1f2opnxt;-fsoinzte-:s1i.z4er:e0m;;'p;o
-                                                                                      i n t e r}-
-                                                    e v e n t/s/: nMoonbei;l'e; 
-                                                    g u i l d   c a r d  eplh.osttoy
-                                                  l e . p ocsointsito nc a=r d'Prheoltaot i=v ed'o;c
-                                                  u m e n t . q u e r yeSle.laepcpteonrd(C'h.icladr(do-vp)h;o
-                                                    t o ' ) ; 
-                                                } 
-                                                i f   ( c a r}d)P;h
-                      o t o )   { 
-                        e l . a d d EcvaerndtPLhiosttoe.nsetry(l'em.ocussseTleexatv e=' ,' bfaucnkcgtrioounn(d)- i{m
-                          a g e : u r l ( 'c+odnastta Uorvl +=' )e;lb.aqcukegrryoSuenlde-cstiozre(:'c.oavveart;abra-cokvgerroluanyd'-)p;o
-                        s i t i o n : c einft e(ro;vb)o rodve.rr-ermaodvieu(s):;8
-                        p x ; f o n t}-)s;i
-                      z e : 0 ;}'
-                                        ;
-
-                      m}a
-        k e C}l
-    i
-    c k afbulnec(tsiboInc osne)t;u
-    p A v a tmaarkCelCilcikc(k)a b{l
-                                   e ( c a rcdoPnhsott os)b;I
-                                   c
-                                   o n   =  /d/o cRuemsetnotr.eg estaEvleedm eanvtaBtyaIrd
-                                   ( ' s b -cgoennsdte rs-aivceodn '=) ;l
-                                   o c a l Sctoonrsatg ec.agredtPIhtoetmo( '=i sdeokcauim_eanvta.tqaure'r)y;S
-                                   e l e c tiofr (('s.acvaerdd)- pahpoptloy'A)v;a
-                                   t a r ( scaovnesdt) ;i
-                                   n p u}t
-
-    =   d/o/c uRmuenn ta.fctreera tgeaEmlee mleonatd(s'
-                                                     i n piuft '()d;o
-      c u m e nitn.prueta.dtyySptea t=e  '=f=i=l e''c;o
-      m p l e tien'p)u t{.
-      a c c e pste t=T i'miemoaugte(/s*e't;u
-    p A v a tianrpCulti.cskt,y l1e5.0d0i)s;p
-    l a y}  =e l'sneo n{e
-    ' ; 
-        w i nddoocwu.maedndtE.vbeondtyL.iasptpeennedrC(h'illoda(di'n,p uftu)n;c
-  t
-  i o n ( )i n{p uste.taTdidmEevoeuntt(LsiesttuepnAevra(t'acrhCalnigcek',,  1f5u0n0c)t;i o}n)(;)
-  { 
-  } 
-
-       / /c oAnlssto  friel-ea p=p liyn pwuhte.nf inlaevsi[g0a]t;i
-  n g   b e t wiefe n( !sfcirleee)n sr e(tguarmne; 
-  u s e s   d ycnoanmsitc  rreeanddeerr i=n gn)e
-  w   FciolnesRte a_doerri(g)R;e
-  n d e r   =  rweianddeorw..ornelnodaedr S=i dfeubnacrt i|o|n (wei)n d{o
-                                                                        w . u p d a t e Sciodnesbta rd;a
-                                                                        t a Usrelt I=n tee.rtvaarlg(eftu.nrcetsiuolnt(;)
-                                                                                                    { 
-                                                                                   c olnoscta lsSatvoerda g=e .lsoectaIltSetmo(r'aigsee.kgaeit_Iatveamt(a'ri's,e kdaait_aaUvralt)a;r
-                                                                                     ' ) ; 
-                                                                                              iafp p(l!ysAavvaetda)r (rdeattuarUnr;l
-                                                                          ) ; 
-                                                                              c o n s t} ;s
-                                                                        b I c o n   =r edaodceurm.erneta.dgAestDEalteamUeRnLt(BfyiIlde()';s
-                                                                          b - g e n}d)e;r
-  -
-    i c o n 'f)u;n
-    c t i o ni fm a(ksebCIlciocnk a&b&l e!(seblI)c o{n
-                                                     . s t y l e .ibfa c(k!gerlo)u nrdeItmuargne;)
-                                                     { 
-                                                               e l .asptpyllyeA.vcautrasro(rs a=v e'dp)o;i
-                                                                 n t e r ' ; 
-                                                                 s e t u p A vealt.atriCtlliec k=( )';C
-                                                                 l i c k  }t
-                                                     o   u}p,l o1a0d0 0p)r;o
-  f}i)l(e) ;p
-  i<c/tsucrrei'p;t
-    >      el.addEventListener('click', function(e) {
-              e.stopPropagation();
-              input.click();
-    });
-        // Show camera overlay on hover
-        el.addEventListener('mouseenter', function() {
-                  if (!el.querySelector('.avatar-overlay')) {
-                              const ov = document.createElement('div');
-                              ov.className = 'avatar-overlay';
-                              ov.innerHTML = '📷';
-                              ov.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);border-radius:inherit;font-size:1.4rem;pointer-events:none;';
-                              el.style.position = 'relative';
-                              el.appendChild(ov);
-                  }
-        });
-        el.addEventListener('mouseleave', function() {
-                  const ov = el.querySelector('.avatar-overlay');
-                  if (ov) ov.remove();
-        });
-  }
-
-      makeClickable(sbIcon);
-      makeClickable(cardPhoto);
-
-      // Restore saved avatar
-      const saved = localStorage.getItem('isekai_avatar');
-      if (saved) applyAvatar(saved);
-  }
-
-    // Run after game 3000
-    if (document.readyState === 'complete') {
-          setTimeout(setupAvatarClick, 1500);
-    } else {
-          window.addEventListener('load', function() { setTimeout(setupAvatarClick, 1500); });
+// PROFILE PICTURE UPLOAD
+(function() {
+  function applyAvatar(dataUrl) {
+    var sbIcon = document.getElementById('sb-gender-icon');
+    if (sbIcon) {
+      sbIcon.style.backgroundImage = 'url(' + dataUrl + ')';
+      sbIcon.style.backgroundSize = 'cover';
+      sbIcon.style.backgroundPosition = 'center';
+      sbIcon.style.borderRadius = '12px';
+      sbIcon.style.fontSize = '0';
     }
-
-    // Also re-apply when navigating between screens (game uses dynamic rendering)
-    const _origRender = window.renderSidebar || window.updateSidebar;
-    setInterval(function() {
-          const saved = localStorage.getItem('isekai_avatar');
-                  if (sbIcon && sbIcon.style.cursor !== 'pointer') {
-          const sbIcon = document.getElementById('sb-gender-icon');
-          if (sbIcon && !sbIcon.style.backgroundImage) {
-                  applyAvatar(saved);
-                  setupAvatarClick();
-          }
-    }, 1000);
-  })();
+  }
+  function setupAvatarClick() {
+    var sbIcon = document.getElementById('sb-gender-icon');
+    if (!sbIcon || sbIcon.style.cursor === 'pointer') return;
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.style.display = 'none';
+    document.body.appendChild(input);
+    input.addEventListener('change', function() {
+      var file = input.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        localStorage.setItem('isekai_avatar', e.target.result);
+        applyAvatar(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+    sbIcon.style.cursor = 'pointer';
+    sbIcon.title = 'Tap to set profile picture';
+    sbIcon.addEventListener('click', function(e) { e.stopPropagation(); input.click(); });
+    sbIcon.addEventListener('mouseenter', function() {
+      if (!sbIcon.querySelector('.av-ov')) {
+        var ov = document.createElement('div');
+        ov.className = 'av-ov';
+        ov.textContent = '\u{1F4F7}';
+        ov.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.55);border-radius:inherit;font-size:1.4rem;pointer-events:none;';
+        sbIcon.style.position = 'relative';
+        sbIcon.appendChild(ov);
+      }
+    });
+    sbIcon.addEventListener('mouseleave', function() {
+      var ov = sbIcon.querySelector('.av-ov');
+      if (ov) ov.remove();
+    });
+    var saved = localStorage.getItem('isekai_avatar');
+    if (saved) applyAvatar(saved);
+  }
+  setInterval(function() {
+    setupAvatarClick();
+    var saved = localStorage.getItem('isekai_avatar');
+    if (saved) applyAvatar(saved);
+  }, 1500);
+})();
 </script>
 </body>
 </html>
