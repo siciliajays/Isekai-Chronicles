@@ -8362,7 +8362,7 @@ function generateQuestEnemy(quest) {
   };
   const pool = enemies[quest.rank] || enemies.G;
   const e = pool[Math.floor(Math.random() * pool.length)];
-  const hp = 20 * t;
+  const hp = 200 * t;
   return { name: e.name, icon: e.icon, flavor: e.flavor, hp: hp, maxHp: hp, currentHp: hp, str: 3 * t, def: t, dex: Math.floor(t * 1.5), rank: quest.rank };
 }
 
@@ -8396,10 +8396,10 @@ function generateForestEnemy() {
   let defMult = e.trait === 'armored' ? 2.5 : 1;
   let dexMult = e.trait === 'swift'   ? 2.0 : 1;
   let strMult = e.trait === 'charge'  ? 1.5 : 1;
-  const hp  = Math.floor((15 + Math.random() * 10) * t);
-  const str = Math.floor((2 + Math.random() * 2) * t * strMult);
-  const def = Math.floor((0.5 + Math.random()) * t * defMult);
-  const dex = Math.floor((1 + Math.random() * 2) * t * dexMult);
+  const hp  = Math.floor((30 + Math.random() * 10) * t);
+  const str = Math.floor((20 + Math.random() * 2) * t * strMult);
+  const def = Math.floor((6 + Math.random()) * t * defMult);
+  const dex = Math.floor((10 + Math.random() * 2) * t * dexMult);
   return { name: e.name, icon: e.icon, flavor: e.flavor, hp, maxHp: hp, currentHp: hp, str, def, dex,
            trait: e.trait, traitDesc: e.traitDesc, isWild: true };
 }
