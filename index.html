@@ -8279,6 +8279,7 @@ if (_skillPool < _skillCost) {
   }
   combatState.waitingForPlayer = false;
   if (_isMage) { combatState.playerMp -= _skillCost; } else { combatState.playerStamina -= _skillCost; }
+  if(_isMage){G.mp=combatState.playerMp;}else{G.stamina=combatState.playerStamina;}
   combatState.turn++;
   if (!combatState.skillCooldowns) combatState.skillCooldowns = {};
   combatState.skillCooldowns[skillId] = sk.cooldown;
@@ -8746,6 +8747,19 @@ function updatePlayerHpDisplay() {
   if (staTxt) staTxt.textContent = Math.floor(sta)  + '/100';
   // Also update combat topbar STA bar
   updateCombatTopbarSta(sta);
+
+  // Update MP bar for mage classes
+  const mpBar  = document.getElementById('bar-mp');
+  const mpTxt  = document.getElementById('txt-mp');
+  if (mpBar || mpTxt) {
+    const currentMp = combatState ? (combatState.playerMp || 0) : (G.mp || 0);
+    const maxMp     = combatState ? (combatState.playerMaxMp || G.maxMp || 100) : (G.maxMp || 100);
+    const mpPct     = Math.max(0, Math.min(100, (currentMp / maxMp) * 100));
+    if (mpBar) mpBar.style.width = mpPct + '%';
+    if (mpTxt) mpTxt.textContent  = Math.floor(currentMp) + '/' + Math.floor(maxMp);
+    // Sync back to G so sidebar mp bar also updates
+    G.mp = currentMp;
+  }
 }
 
 function useHealthPotion(log) {
