@@ -11879,7 +11879,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (saved) applyAvatar(saved);
   }
 
-    // Run after game loads
+    // Run after game 3000
     if (document.readyState === 'complete') {
           setTimeout(setupAvatarClick, 1500);
     } else {
@@ -11890,7 +11890,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const _origRender = window.renderSidebar || window.updateSidebar;
     setInterval(function() {
           const saved = localStorage.getItem('isekai_avatar');
-          if (!saved) return;
+                  if (sbIcon && sbIcon.style.cursor !== 'pointer') {
           const sbIcon = document.getElementById('sb-gender-icon');
           if (sbIcon && !sbIcon.style.backgroundImage) {
                   applyAvatar(saved);
