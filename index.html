@@ -8393,13 +8393,13 @@ function generateForestEnemy() {
   const e = wildCreatures[Math.floor(Math.random() * wildCreatures.length)];
   // Slightly randomised stats — wild creatures are scrappier, less predictable
   // Stone crab has high DEF, swift have high DEX, armored have high DEF
-  let defMult = e.trait === 'armored' ? 2.5 : 1;
-  let dexMult = e.trait === 'swift'   ? 2.0 : 1;
-  let strMult = e.trait === 'charge'  ? 1.5 : 1;
-  const hp  = Math.floor((300 + Math.random() * 10) * t);
-  const str = Math.floor((200 + Math.random() * 2) * t * strMult);
-  const def = Math.floor((60 + Math.random()) * t * defMult);
-  const dex = Math.floor((100 + Math.random() * 2) * t * dexMult);
+  let defMult = e.trait === 'armored' ? 6 : 6;
+  let dexMult = e.trait === 'swift'   ? 6 : 4;
+  let strMult = e.trait === 'charge'  ? 6 : 5;
+  const hp  = Math.floor((300 + Math.random() * 100) * t);
+  const str = Math.floor((200 + Math.random() * 20) * t * strMult);
+  const def = Math.floor((60 + Math.random()) * 20 * defMult);
+  const dex = Math.floor((100 + Math.random() * 20) * t * dexMult);
   return { name: e.name, icon: e.icon, flavor: e.flavor, hp, maxHp: hp, currentHp: hp, str, def, dex,
            trait: e.trait, traitDesc: e.traitDesc, isWild: true };
 }
