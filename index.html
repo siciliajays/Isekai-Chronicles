@@ -7943,7 +7943,7 @@ const CLASS_SKILLS = {
         const hpPct = G.hp / G.maxHp;
         const mult = hpPct < 0.5 ? 3.2 : 2.2;
         const dmg = Math.max(2, Math.floor(getTotalStat('str') * mult + Math.random() * 4) - (e.def||0));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         const bonus = hpPct < 0.5 ? ' 🔥 RAGE BONUS!' : '';
         addCombatLog(log, `⚡ Blood Rage! You unleash fury for ${dmg} damage!${bonus}`, 'skill-action');
         updateEnemyBar(e);
@@ -7996,7 +7996,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(1, Math.floor(getTotalStat('dex') * 1.5) - (e.def||0));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         e._tripped = true;
         addCombatLog(log, `💥 Leg Sweep! ${e.name} stumbles for ${dmg} dmg and is off-balance!`, 'skill-action');
         updateEnemyBar(e);
@@ -8010,7 +8010,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(2, Math.floor((getTotalStat('str') + getTotalStat('int')) * 1.5 + Math.random() * 5));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         addCombatLog(log, `✝️ Holy Smite! Divine light burns ${e.name} for ${dmg} holy damage! (Ignores armor)`, 'skill-action');
         updateEnemyBar(e);
         return e.currentHp <= 0 ? 'win' : null;
@@ -8034,7 +8034,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(3, Math.floor(getTotalStat('int') * 3 + Math.random() * 6));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         e._burning = 2;
         e._burnDmg = Math.max(1, Math.floor(getTotalStat('int') * 0.5));
         addCombatLog(log, `🔥 Fireball! ${e.name} takes ${dmg} fire damage and is BURNING! (${e._burnDmg}/turn)`, 'skill-action');
@@ -8047,7 +8047,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(2, Math.floor(getTotalStat('int') * 2.2 + Math.random() * 4));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         e._frozen = true;
         addCombatLog(log, `❄️ Ice Lance! ${e.name} takes ${dmg} cold damage and is FROZEN — skips next action!`, 'skill-action');
         updateEnemyBar(e);
@@ -8061,7 +8061,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(2, Math.floor(getTotalStat('int') * 2 + Math.random() * 4) - Math.floor((e.def||0)*0.3));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         G.hp = Math.min(G.maxHp, G.hp + dmg);
         updateTopBar(); updatePlayerHpDisplay();
         addCombatLog(log, `💀 Drain Life! Siphon ${dmg} damage from ${e.name} — fully restored to you!`, 'skill-action');
@@ -8087,7 +8087,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(2, Math.floor(getTotalStat('int') * 2.5 + Math.random() * 5));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         addCombatLog(log, `🌀 Arcane Burst! Pure arcane energy blasts ${e.name} for ${dmg} damage!`, 'skill-action');
         updateEnemyBar(e);
         return e.currentHp <= 0 ? 'win' : null;
@@ -8108,7 +8108,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(3, Math.floor((getTotalStat('str') + getTotalStat('int')) * 1.8 + Math.random() * 6) - (e.def||0));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         addCombatLog(log, `✨ Spellblade! Arcane-charged blade carves ${e.name} for ${dmg} magic-physical damage!`, 'skill-action');
         updateEnemyBar(e);
         return e.currentHp <= 0 ? 'win' : null;
@@ -8130,7 +8130,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(2, Math.floor(getTotalStat('dex') * 3 + Math.random() * 5));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg; // bypasses def
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg; // bypasses def
         addCombatLog(log, `🌑 Shadow Strike! You materialise behind ${e.name} for ${dmg} unblockable damage!`, 'skill-action');
         updateEnemyBar(e);
         return e.currentHp <= 0 ? 'win' : null;
@@ -8153,7 +8153,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(1, Math.floor(getTotalStat('dex') * 1.8 + Math.random()*3) - (e.def||0));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         const poisonDmg = Math.max(1, Math.floor(getTotalStat('dex') * 0.4));
         e._poisoned = 4;
         e._poisonDmg = poisonDmg;
@@ -8177,7 +8177,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(3, Math.floor(getTotalStat('dex') * 4 + Math.random() * 8));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         addCombatLog(log, `🏹 Aimed Shot! Perfect precision — ${dmg} armor-piercing damage to ${e.name}!`, 'skill-action');
         updateEnemyBar(e);
         return e.currentHp <= 0 ? 'win' : null;
@@ -8188,7 +8188,7 @@ const CLASS_SKILLS = {
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(1, Math.floor(getTotalStat('dex') * 1 + Math.random()*3));
-        const nerfedDmg = Math.ceil(dmg * 0.5);  e.currentHp -= nerfedDmg;
+        const nerfedDmg = Math.ceil(dmg * 5);  e.currentHp -= nerfedDmg;
         e._disarmed = true;
         addCombatLog(log, `🔩 Caltrops! Scattered traps deal ${dmg} bleed damage — ${e.name} loses next attack!`, 'skill-action');
         updateEnemyBar(e);
