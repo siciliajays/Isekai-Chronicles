@@ -8057,7 +8057,7 @@ const CLASS_SKILLS = {
   ],
   necromancer: [
     { id:'drain_life',   name:'💀 Drain Life',    icon:'💀', mpCost:25, cooldown:3,
-      desc:'Siphon life force. Deals 2× INT damage AND heals you for the same amount.',
+      desc:'Siphon life force. Deals 0.4× INT damage AND heals you for the same amount.',
       use: function(cs, log) {
         const e = cs.enemy;
         const dmg = Math.max(2, Math.floor(getTotalStat('int') * 2 + Math.random() * 4) - Math.floor((e.def||0)*0.3));
