@@ -6706,7 +6706,7 @@ const ALL_QUESTS = {
 
 function setupQuestBoard() {
   const rankIndex    = RANK_ORDER.indexOf(G.guildRank);
-  const visibleRanks = RANK_ORDER.filter((r,i) => i > 0 && i <= rankIndex && ALL_QUESTS[r]);
+  const visibleRanks = RANK_ORDER.filter((r, i) => i <= rankIndex && ALL_QUESTS[r]);
   const defaultRank  = visibleRanks[visibleRanks.length - 1] || G.guildRank;
   window._qbRank = defaultRank;
   // Highlight correct tab
@@ -6719,7 +6719,7 @@ function setupQuestBoard() {
 function renderQuestBoard() {
   getBoardRefreshAt();
   const rankIndex    = RANK_ORDER.indexOf(G.guildRank);
-  const visibleRanks = RANK_ORDER.filter((r,i) => i > 0 && i <= rankIndex && ALL_QUESTS[r]);
+  const visibleRanks = RANK_ORDER.filter((r, i) => i <= rankIndex && ALL_QUESTS[r]);
 
   const tabsHtml = visibleRanks.length > 1
     ? `<div style="display:flex;gap:0.4rem;margin-bottom:0.8rem;flex-wrap:wrap;" id="qb-rank-tabs">
