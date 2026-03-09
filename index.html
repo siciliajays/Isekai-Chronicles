@@ -8089,9 +8089,8 @@ const CLASS_SKILLS = {
         addCombatLog(log, `💀 Life Drain! Siphon ${dmg} damage from ${e.name} — fully restored to you!`, 'skill-action');
         updateEnemyBar(e);
         return e.currentHp <= 0 ? 'win' : null;
-      }
-    };
-  const SKILLS = [ //
+      };
+const SKILLS = [
     
     { id:'curse',        name:'☠️ Wither Curse',  icon:'☠️', mpCost:18, cooldown:4,
       desc:'Apply a rotting curse. Enemy loses 20% max HP over 3 turns.',
