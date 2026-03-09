@@ -8089,7 +8089,9 @@ const CLASS_SKILLS = {
         updateEnemyBar(e);
         return e.currentHp <= 0 ? 'win' : null;
       }
-    },
+    };
+  const SKILLS = [ //
+    
     { id:'curse',        name:'☠️ Wither Curse',  icon:'☠️', mpCost:18, cooldown:4,
       desc:'Apply a rotting curse. Enemy loses 20% max HP over 3 turns.',
       use: function(cs, log) {
