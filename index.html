@@ -6711,6 +6711,27 @@ const ALL_QUESTS = {
   const rankIndex = RANK_ORDER.indexOf(G.guildRank);
   const visibleRanks = RANK_ORDER.filter((r, i) => i <= rankIndex);
 
+const tabsHtml = visibleRanks.map(r => `
+<button class="qb-rank-pill" onclick="qbSwitchRank('${r}')">Rank ${r}</button>
+ `).join('');    
+    
+const container = document.getElementById('qb-tabs-container');
+if (container) {
+  container.innerHTML = tabsHtml;
+  
+  const tabsHtml = visibleRanks.map(r =>`
+    <button class="qb-rank-pill ${r === currentSelectedRank ? 'active' : ''}" 
+            onclick="qbSwitchRank('${r}')">
+      Rank ${r}
+    </button>
+  `).join('');
+
+  const container = document.getElementById('qb-tabs-container');
+  if (container) {
+    container.innerHTML = tabsHtml;
+  }
+}
+    
   const defaultRank  = visibleRanks[visibleRanks.length - 1] || G.guildRank;
   window._qbRank = defaultRank;
   // Highlight correct tab
