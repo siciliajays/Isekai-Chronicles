@@ -6709,7 +6709,7 @@ const ALL_QUESTS = {
   
   function setupQuestBoard() {
   const rankIndex = RANK_ORDER.indexOf(G.guildRank);
-  const visibleRanks = RANK_ORDER.filter((r, i) => i <= rankIndex);
+ const visibleRanks = RANK_ORDER.filter((r,i) => i > 0 && i <= rankIndex && ALL_QUESTS[r]);
 
 const tabsHtml = visibleRanks.map(r => `
 <button class="qb-rank-pill" onclick="qbSwitchRank('${r}')">Rank ${r}</button>
@@ -6744,7 +6744,7 @@ if (container) {
 function renderQuestBoard() {
   getBoardRefreshAt();
   const rankIndex    = RANK_ORDER.indexOf(G.guildRank);
-  const visibleRanks = RANK_ORDER.filter((r, i) => i <= rankIndex);
+  const visibleRanks = RANK_ORDER.filter((r,i) => i > 0 && i <= rankIndex && ALL_QUESTS[r]);
 
   const tabsHtml = visibleRanks.length > 0
     ? `<div style="display:flex;gap:0.4rem;margin-bottom:0.8rem;flex-wrap:wrap;" id="qb-rank-tabs">
