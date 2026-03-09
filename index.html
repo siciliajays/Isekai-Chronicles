@@ -9642,8 +9642,8 @@ function startGuildBrawl() {
   };
   closeModals();
   // Big honor penalty just for starting a brawl
-  G.honor = Math.max(-100, G.honor - 5);
-  notify('⚠ You started a brawl! Honor −5', 'error');
+  G.honor = Math.max(-100, G.honor - 10);
+  notify('⚠ You started a brawl! Honor −10', 'error');
   startCombat(null, enemy, false);
 }
 
@@ -9694,7 +9694,7 @@ function confirmBrawl() {
     '<div class="modal-title">⚔️ Start a Brawl?</div>'
     + '<div class="narrative-box">' + b.icon + ' <strong>' + b.name + '</strong> (' + b.bRank + '-Rank ' + b.class + ') turns to face you, eyes hard.<br><br>'
     + '<em>' + b.flavor + '</em><br><br>'
-    + '<span style="color:#e04040;font-size:0.8rem;">Starting a brawl costs Honor −5. You will fight a ' + b.bRank + '-Rank adventurer.</span></div>'
+    + '<span style="color:#e04040;font-size:0.8rem;">Starting a brawl costs Honor −10. You will fight a ' + b.bRank + '-Rank adventurer.</span></div>'
     + '<div style="display:flex;gap:0.6rem;margin-top:1rem;">'
     + '<button class="btn" style="flex:1;" onclick="talkAdventurers()">← Back down</button>'
     + '<button class="btn" style="flex:1;border-color:#e04040;color:#e04040;" onclick="startGuildBrawl()">⚔️ Throw the first punch</button>'
