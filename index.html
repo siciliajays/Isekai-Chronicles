@@ -9018,7 +9018,7 @@ function endCombat(won) {
     } else if (combatState.enemy && combatState.enemy.isBrawl) {
       // Won the guild brawl — some grudging respect, but still dishonorable
       const bEnemy = combatState.enemy;
-      G.honor = Math.max(-100, G.honor - 3); // net: -5 for starting, -3 for winning = -8 total
+      G.honor = Math.max(-100, G.honor - 3); // net: -10 for starting, -8 for winning = -18 total
       updateSidebars(); updateTopBar(); saveGame();
       showVictoryOverlay(
         '<div style="font-size:2.8rem;margin-bottom:0.3rem;">🤜</div>'
