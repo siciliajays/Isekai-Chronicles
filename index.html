@@ -8768,10 +8768,10 @@ function useHealthPotion(log) {
     return;
   }
   G.inventory['Health Potion']--;
-  G.hp = Math.min(G.maxHp, G.hp + 30);
+  G.hp = Math.min(G.maxHp, G.hp + 50);
   updateTopBar();
   updatePlayerHpDisplay();
-  addCombatLog(log, '⚗ You drink a Health Potion! +30 HP restored.', 'player-action');
+  addCombatLog(log, '⚗ You drink a Health Potion! +50 HP restored.', 'player-action');
 }
 
 function addCombatLog(logEl, msg, cls) {
