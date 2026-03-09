@@ -6728,6 +6728,7 @@ const ALL_QUESTS = {
 function setupQuestBoard() {
   const rankIndex    = RANK_ORDER.indexOf(G.guildRank);
   const visibleRanks = RANK_ORDER.filter((r, i) => i <= rankIndex);
+
   const defaultRank  = visibleRanks[visibleRanks.length - 1] || G.guildRank;
   window._qbRank = defaultRank;
   // Highlight correct tab
@@ -6742,7 +6743,7 @@ function renderQuestBoard() {
   const rankIndex    = RANK_ORDER.indexOf(G.guildRank);
   const visibleRanks = RANK_ORDER.filter((r, i) => i <= rankIndex);
 
-  const tabsHtml = visibleRanks.length > 1
+  const tabsHtml = visibleRanks.length > 0
     ? `<div style="display:flex;gap:0.4rem;margin-bottom:0.8rem;flex-wrap:wrap;" id="qb-rank-tabs">
         ${visibleRanks.map(r =>
           `<button class="qb-rank-pill${r === G.guildRank ? ' active' : ''}" onclick="qbSwitchRank('${r}')">${r}</button>`
